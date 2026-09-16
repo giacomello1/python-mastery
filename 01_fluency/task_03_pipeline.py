@@ -4,6 +4,8 @@ def pipeline(items, *functions):
         for function in functions:
             value = function(value) 
         yield value  # it's similar to return, but the function doesnt stop after the yield
+
+
 def main():
     result = pipeline(
         range(5),
