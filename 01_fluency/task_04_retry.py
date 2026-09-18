@@ -44,7 +44,7 @@ def limit_calls(n):
         def wrapper(*args, **kwargs): 
             nonlocal calls
             calls += 1
-            if calls <= 3: 
+            if calls <= n: 
                 return function(*args, **kwargs)
             else: 
                 raise RuntimeError("Too many calls")
@@ -65,11 +65,17 @@ def log_calls(function):
     return wrapper
 
 def main():
+
+    # equal to foo = limit_calls(3)(x)
+    # limit_calls(3) return a decorator function obj 
+    # decorator(function) return a wrapper(*args, **kwargs)
+    # 
     @limit_calls(3)
     def foo(x):
         return x * 2
 
 
+    # every call to foo is a call to limit_calls
     print(foo(10))
     print(foo(20))
     print(foo(30))
